@@ -24,6 +24,7 @@
                 <input type="checkbox" class="form-check-input" id="isAustralian" v-model="formData.isAustralian" />
                 <label class="form-check-label" for="isAustralian">Australian Resident?</label>
               </div>
+              <div v-if="errors.resident" class="text-danger">{{ errors.resident }}</div>
             </div>
             <div class="col-md-6 col-sm-6">
               <label for="gender" class="form-label">Gender</label>
@@ -32,11 +33,13 @@
                 <option value="female">Female</option>
                 <option value="other">Other</option>
               </select>
+              <div v-if="errors.gender" class="text-danger">{{ errors.gender }}</div>
             </div>
           </div>
           <div class="mb-3">
             <label for="reason" class="form-label">Reason for joining</label>
             <textarea class="form-control" id="reason" rows="3" v-model="formData.reason"></textarea>
+            <div v-if="errors.reason" class="text-danger">{{ errors.reason }}</div>
           </div>
           <div class="text-center">
             <button type="submit" class="btn btn-primary me-2">Submit</button>
@@ -49,7 +52,11 @@
   <DataTable :value="submittedCards" v-if="submittedCards.length" class="mt-5">
     <Column field="username" header="Username"></Column>
     <Column field="password" header="Password"></Column>
-    <Column header="Australian Resident" :body="row => row.isAustralian ? 'Yes' : 'No'"></Column>
+    <Column header="Australian Resident">
+      <template #body="slotProps">
+        {{ slotProps.data.isAustralian ? 'Yes' : 'No' }}
+      </template>
+    </Column>
     <Column field="gender" header="Gender"></Column>
     <Column field="reason" header="Reason"></Column>
   </DataTable>
@@ -73,7 +80,10 @@ const submittedCards = ref([]);
 const submitForm = () => {
   validateName(true);
   validatePassword(true);
-  if (!errors.value.username && !errors.value.password) {
+  validateResident(true);
+  validateGender(true);
+  validateReason(true);
+  if (!errors.value.username && !errors.value.password && !errors.value.resident && !errors.value.gender && !errors.value.reason) {
     submittedCards.value.push({ ...formData.value });
     clearForm();
   }
@@ -124,6 +134,30 @@ const validatePassword = (blur) => {
     if (blur) errors.value.password = "Password must contain at least one special character.";
   } else {
     errors.value.password = null;
+  }
+};
+
+const validateResident = (blur) => {
+  if (!formData.value.isAustralian) {
+    if (blur) errors.value.resident = "Australian resident must be checked.";
+  } else {
+    errors.value.resident = null;
+  }
+};
+
+const validateGender = (blur) => {
+  if (!formData.value.gender) {
+    if (blur) errors.value.gender = "Gender must be selected.";
+  } else {
+    errors.value.gender = null;
+  }
+};
+
+const validateReason = (blur) => {
+  if (!formData.value.reason.trim()) {
+    if (blur) errors.value.reason = "Reason for joining cannot be empty.";
+  } else {
+    errors.value.reason = null;
   }
 };
 
