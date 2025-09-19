@@ -15,21 +15,22 @@ function handleLogout() {
     <header class="d-flex justify-content-center py-3">
       <ul class="nav nav-pills">
         <li class="nav-item">
-          <router-link to="/" class="nav-link" active-class="active" aria-current="page"
-            >Home (Week 5)</router-link
-          >
+          <router-link to="/" class="nav-link" active-class="active" aria-current="page">Home (Week 5)</router-link>
         </li>
         <li class="nav-item">
           <router-link to="/about" class="nav-link" active-class="active">About</router-link>
-        </li>       
+        </li>
         <li class="nav-item">
           <router-link to="/addbook" class="nav-link" active-class="active">Add Book</router-link>
-        </li>       
-         <li class="nav-item">
-          <router-link v-if="isAdmin" to="/FireLogin" class="nav-link" active-class="active">Firebase Login</router-link>
+        </li>
+        <li class="nav-item">
+          <router-link v-if="isAdmin" to="/FireLogin" class="nav-link" active-class="active">Firebase
+            Login</router-link>
         </li>
         <li class="nav-item ms-3">
-          <button v-if="isAuthenticated" class="btn btn-outline-danger btn-sm" @click="handleLogout">Logout</button>
+          <router-link v-if="isAuthenticated" to="/logout" class="btn btn-outline-danger btn-sm"  active-class="active">
+            Logout
+          </router-link>
         </li>
       </ul>
     </header>
@@ -52,6 +53,7 @@ function handleLogout() {
   background-color: var(--bs-dark);
   border-color: var(--bs-gray);
 }
+
 .form-control-dark:focus {
   color: #fff;
   background-color: var(--bs-dark);
