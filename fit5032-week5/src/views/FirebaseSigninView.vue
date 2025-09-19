@@ -1,8 +1,18 @@
 <template>
-    <h1>Create an Account</h1>
-    <p><input type="text" placeholder="Email" v-model="email" /></p>
-    <p><input type="text" placeholder="Password" v-model="password" /></p>
-    <p><button @click="register"> Save to Firebase</button></p>
+  <div class="container mt-5" style="max-width: 400px;">
+    <h1 class="mb-4">Create an Account</h1>
+    <form @submit.prevent="register">
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" id="email" v-model="email" class="form-control" placeholder="Enter your email" required />
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input type="password" id="password" v-model="password" class="form-control" placeholder="Enter your password" required />
+      </div>
+      <button type="submit" class="btn btn-primary w-100">Register</button>
+    </form>
+  </div>
 </template>
 
 <script setup>

@@ -1,16 +1,16 @@
 <template>
-    <div>
+    <div class="container mt-4" style="max-width: 500px;">
         <h1>Add Book</h1>
         <form @submit.prevent="addBook">
-            <div>
-                <label for="isbn">ISBN:</label>
-                <input type="text" v-model="isbn" id="isbn" required />
+            <div class="mb-3">
+                <label for="isbn" class="form-label">ISBN:</label>
+                <input type="text" v-model="isbn" id="isbn" required class="form-control" />
             </div>
-            <div>
-                <label for="name">Name:</label>
-                <input type="text" v-model="name" id="name" required />
+            <div class="mb-3">
+                <label for="name" class="form-label">Name:</label>
+                <input type="text" v-model="name" id="name" required class="form-control" />
             </div>
-            <button type ="submit">Add Book</button>
+            <button type="submit" class="btn btn-primary w-100">Add Book</button>
         </form>
         <BookList />
     </div>
