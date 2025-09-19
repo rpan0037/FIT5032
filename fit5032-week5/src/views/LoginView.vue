@@ -1,21 +1,31 @@
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { login, isAuthenticated } from '@/auth'
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
+import { userRole, isAuthenticated, isAdmin } from '@/auth'
 
 const router = useRouter()
-
-const username = ref('')
+const email = ref('')
 const password = ref('')
 const error = ref('')
+const auth = getAuth()
 
-const onSubmit = () => {
+const onSubmit = async () => {
   error.value = ''
-  const ok = login(username.value.trim(), password.value)
-  if (ok) {
-    router.push('/about')
-  } else {
-    error.value = 'Invalid username or password.'
+  try {
+    await signInWithEmailAndPassword(auth, email.value.trim(), password.value)
+    userRole(auth.currentUser.email)
+    if(isAdmin.value)
+    router.push('/FireLogin')
+    else
+      router.push('/about') // success redirect
+    isAuthenticated.value = true
+    userRole(auth.currentUser.email)
+    console.log("Current user:", auth.currentUser.email)
+    console.log("User role admin? : ", isAdmin.value)
+  } catch (e) {
+    error.value = e?.code || 'Invalid credentials.'
+    isAuthenticated.value = false
   }
 }
 </script>
@@ -31,8 +41,8 @@ const onSubmit = () => {
 
         <form @submit.prevent="onSubmit">
           <div class="mb-3">
-            <label class="form-label" for="username">Username</label>
-            <input id="username" class="form-control" v-model="username" autocomplete="username" />
+            <label class="form-label" for="email">Email</label>
+            <input id="email" class="form-control" v-model="email" autocomplete="email" />
           </div>
 
           <div class="mb-3">
@@ -48,7 +58,7 @@ const onSubmit = () => {
         </form>
 
         <div class="mt-3 small text-muted">
-          Demo creds: <code>admin</code> / <code>Password123!</code>
+          Demo creds: <code>admin@example.com</code> / <code>Password123!</code>
         </div>
       </div>
     </div>

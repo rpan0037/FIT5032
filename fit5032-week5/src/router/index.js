@@ -11,19 +11,19 @@ const routes = [
     path: '/addbook',
     name: 'AddBook',
     component: AddBookView,
-    // meta: { requiresAuth: true }
+    meta: { requiresAuth: true }
   },
   {
     path: '/',
     name: 'Home',
     component: HomeView,
-    // meta: { requiresAuth: true }
+    meta: { requiresAuth: true }
   },
   {
     path: '/about',
     name: 'About',
     component: AboutView,
-    // meta: { requiresAuth: true }
+    meta: { requiresAuth: true }
   },
   {
     path: '/login',
@@ -33,7 +33,9 @@ const routes = [
   {
     path: '/FireLogin',
     name: 'FireLogin',
-    component: FirebaseSigninView
+    component: FirebaseSigninView,
+    meta: { requiresAuth: true }
+
   }
 ]
 

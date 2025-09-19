@@ -1,18 +1,18 @@
 import { ref } from 'vue'
 
 export const isAuthenticated = ref(false)
+export const isAdmin = ref(false)
 
-const DEMO_USER = 'admin'
+const DEMO_USER = 'pandiaspam@gmail.com'
 const DEMO_PASS = 'Password123!'
 
-export function login(username, password) {
-  if (username === DEMO_USER && password === DEMO_PASS) {
-    isAuthenticated.value = true
-    return true
+export function userRole(username, password) {
+  if (username === DEMO_USER) {
+    isAdmin.value = true
   }
-  return false
 }
 
 export function logout() {
   isAuthenticated.value = false
+  isAdmin.value = false
 }

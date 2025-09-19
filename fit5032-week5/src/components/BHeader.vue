@@ -1,5 +1,5 @@
 <script setup>
-import { isAuthenticated, logout } from '@/auth'
+import { isAdmin, isAuthenticated, logout } from '@/auth'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
@@ -26,7 +26,7 @@ function handleLogout() {
           <router-link to="/addbook" class="nav-link" active-class="active">Add Book</router-link>
         </li>       
          <li class="nav-item">
-          <router-link to="/FireLogin" class="nav-link" active-class="active">Firebase Login</router-link>
+          <router-link v-if="isAdmin" to="/FireLogin" class="nav-link" active-class="active">Firebase Login</router-link>
         </li>
         <li class="nav-item ms-3">
           <button v-if="isAuthenticated" class="btn btn-outline-danger btn-sm" @click="handleLogout">Logout</button>
