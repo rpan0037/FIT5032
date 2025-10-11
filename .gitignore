@@ -1,0 +1,39 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Dependency directories
+node_modules/
+
+# Build output
+dist/
+build/
+public/build/
+
+# Local environment files
+.env
+.env.local
+.env.*.local
+
+# Editor directories and files
+.vscode/
+.idea/
+*.swp
+
+# macOS system files
+.DS_Store
+
+# Optional: Ignore local test coverage reports
+coverage/
+
+# Optional: Ignore temporary files
+*.tmp
+*.temp
+
+# Optional: Ignore lock files (if you only want one package manager lock)
+# Uncomment if you don't want Yarn or pnpm lockfiles tracked
+# yarn.lock
+# pnpm-lock.yaml
