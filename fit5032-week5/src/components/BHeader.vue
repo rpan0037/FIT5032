@@ -27,6 +27,10 @@ function handleLogout() {
           <router-link v-if="isAdmin" to="/FireLogin" class="nav-link" active-class="active">Firebase
             Login</router-link>
         </li>
+        <li class="nav-item">
+          <router-link  to="/GetBookCount" class="nav-link" active-class="active">Get Book Count
+          </router-link>
+        </li>
         <li class="nav-item ms-3">
           <router-link v-if="isAuthenticated" to="/logout" class="btn btn-outline-danger btn-sm"  active-class="active">
             Logout

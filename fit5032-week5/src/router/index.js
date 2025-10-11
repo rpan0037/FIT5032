@@ -6,8 +6,14 @@ import LoginView from '../views/LoginView.vue'
 import LogoutView from '../views/LogoutView.vue'
 import { isAuthenticated } from '../auth'
 import FirebaseSigninView from '../views/FirebaseSigninView.vue'
+import GetBookCountView from '../views/GetBookCountView.vue'
 
 const routes = [
+  {
+    path: '/GetBookCount',
+    name: 'GetBookCount',
+    component: GetBookCountView
+  },
   {
     path: '/addbook',
     name: 'AddBook',
